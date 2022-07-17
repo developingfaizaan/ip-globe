@@ -16,17 +16,20 @@ export const IpProvider = ({ children }) => {
     setCurrentIpDetail(res);
   };
 
-  // Fetching user's IP who accesses our website, to show their ip details
-  useEffect(() => {
-    (async () => {
-      const req = await fetch("http://ip-api.com/json");
-      const res = await req.json();
+  const fetchIpOfUser = async () => {
+    const req = await fetch("http://ip-api.com/json");
+    const res = await req.json();
 
-      setCurrentIpDetail(res);
-    })();
+    setCurrentIpDetail(res); // Setting the state
+    return res;
+  };
+
+  useEffect(() => {
+    // Fetching user's IP who accesses our website, to show their ip details
+    fetchIpOfUser();
   }, []);
 
-  const value = { currentIpDetail, fetchIpDetails };
+  const value = { currentIpDetail, fetchIpDetails, fetchIpOfUser };
 
   return <IpContext.Provider value={value}>{children}</IpContext.Provider>;
 };

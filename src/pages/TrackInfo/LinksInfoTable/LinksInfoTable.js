@@ -8,7 +8,7 @@ const DOMAIN = process.env.REACT_APP_DOMAIN;
 
 const LinksInfoTable = ({ data }) => {
   // Loading Animation when data is not yet fetched.
-  if (!data) return <Loader />;
+  if (!data || data.length <= 0) return <Loader />;
 
   return (
     <TableContainer>
@@ -27,11 +27,11 @@ const LinksInfoTable = ({ data }) => {
             <th>Tracked URL</th>
             <td>
               <Link
-                to={`/url/${data.trackingUrl}`}
+                to={`/url/${data.trackingId}`}
                 target="_blank"
                 rel="noreferrer"
               >
-                {`${DOMAIN}url/${data.trackingUrl}`}
+                {`${DOMAIN}url/${data.trackingId}`}
               </Link>
             </td>
           </tr>
@@ -40,18 +40,13 @@ const LinksInfoTable = ({ data }) => {
             <th>Access Link</th>
             <td>
               <Link
-                to={`/track/${data.trackingCode}`}
+                to={`/track/${data.trackingId}`}
                 target="_blank"
                 rel="noreferrer"
               >
-                {`${DOMAIN}track/${data.trackingCode}`}
+                {`${DOMAIN}track/${data.trackingId}`}
               </Link>
             </td>
-          </tr>
-
-          <tr>
-            <th>Track Code</th>
-            <td>{data.trackingCode}</td>
           </tr>
         </tbody>
       </table>

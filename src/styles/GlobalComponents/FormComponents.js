@@ -64,4 +64,13 @@ export const Button = styled.button`
           opacity: 1;
           pointer-events: all;
         `}
+
+  // ------------------- Small Sized Button ------------------- \\
+  ${(props) =>
+    props.size === "small"
+      ? css`
+          height: auto;
+          font-size: 1rem;
+        `
+      : css``}
 `;

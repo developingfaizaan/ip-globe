@@ -1,12 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  doc,
-  getDoc,
-  query,
-  where,
-  collection,
-  onSnapshot,
-} from "firebase/firestore";
+import { doc, getDoc, updateDoc, onSnapshot } from "firebase/firestore";
 // Database
 import { db } from "./firebase";
 
@@ -15,14 +8,10 @@ const useDb = (docId) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    // Reference of a document where the tracking code matches
-    const q = query(collection(db, "urls"), where("trackingCode", "==", docId));
+    const unsubscribe = onSnapshot(doc(db, "urls", docId), (doc) => {
+      const docData = doc.data();
 
-    const unsubscribe = onSnapshot(q, (doc) => {
-      doc.forEach((doc) => {
-        const docData = doc.data();
-        setData(docData);
-      });
+      setData(docData);
     });
 
     return () => unsubscribe();
@@ -38,7 +27,14 @@ export const addToDb = (docId, data) => {
   return db.collection("urls").doc(docId).set(data);
 };
 
-export const getDataFromDb = async (docId) => {
+// Getting Data from db
+export const getDataFromDb = (docId) => {
   const docRef = doc(db, "urls", docId);
   return getDoc(docRef);
+};
+
+// Updating clicks info of a particular document in db
+export const updateClicksInfo = (docId, data) => {
+  const docRef = doc(db, "urls", docId);
+  return updateDoc(docRef, { clicks: data });
 };

@@ -24,22 +24,18 @@ const Form = () => {
     const originalUrl = inputRef.current.value;
 
     // Generating a Short URL id
-    const trackingUrl = nanoid(7);
-
-    // Generating a Traking Code
-    const trackingCode = nanoid(7);
+    const trackingId = nanoid(7);
 
     try {
       // first argument is docID
-      await addToDb(trackingUrl, {
+      await addToDb(trackingId, {
         originalUrl,
-        trackingUrl,
-        trackingCode,
+        trackingId,
         clicks: [],
       });
 
       // Redirecting to trackInfo Page
-      history.push(`/track/${trackingCode}`);
+      history.push(`/track/${trackingId}`);
     } catch (error) {
       setLoading(false);
       inputRef.current.value = "";
