@@ -2,9 +2,10 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 // Context
 import { IpProvider } from "./contexts/IpContext";
 // Pages
-import { IpLookup, UrlTracker } from "./pages";
-// Theme
+import { IpLookup, UrlTracker, TrackInfo, RedirectPage } from "./pages";
+// Styled Components
 import Theme from "./styles/theme";
+import { Container } from "./styles/GlobalComponents";
 
 const App = () => {
   return (
@@ -13,7 +14,11 @@ const App = () => {
         <IpProvider>
           <Theme>
             <Route path="/" component={IpLookup} exact />
-            <Route path="/url-tracker" component={UrlTracker} />
+            <Container>
+              <Route path="/url-tracker" component={UrlTracker} />
+              <Route path="/track/:id" component={TrackInfo} />
+              <Route path="/url/:id" component={RedirectPage} />
+            </Container>
           </Theme>
         </IpProvider>
       </Switch>

@@ -1,5 +1,8 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { nanoid } from "nanoid";
+// Firebase DB helper function
+import { addToDb } from "../../../firebase/useDb";
 // Styled Components
 import {
   Form as StyledForm,
@@ -11,9 +14,12 @@ import {
 
 const Form = () => {
   const inputRef = useRef(null);
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const originalUrl = inputRef.current.value;
 
@@ -23,7 +29,22 @@ const Form = () => {
     // Generating a Traking Code
     const trackingCode = nanoid(7);
 
-    console.log(trackingCode, trackingUrl, originalUrl);
+    try {
+      // first argument is docID
+      await addToDb(trackingUrl, {
+        originalUrl,
+        trackingUrl,
+        trackingCode,
+        clicks: [],
+      });
+
+      // Redirecting to trackInfo Page
+      history.push(`/track/${trackingCode}`);
+    } catch (error) {
+      setLoading(false);
+      inputRef.current.value = "";
+      console.error(error);
+    }
   };
 
   return (
@@ -33,10 +54,10 @@ const Form = () => {
         <Input
           ref={inputRef}
           type="url"
-          placeholder="https://twitter.com/webfaizaan"
+          placeholder="https://github.com/developingfaizaan"
         />
       </FormGroup>
-      <Button>Create URL</Button>
+      <Button disabled={loading}>Create URL</Button>
     </StyledForm>
   );
 };

@@ -1,12 +1,15 @@
 import styled from "styled-components";
 
-export const Layout = styled.section`
+export const Container = styled.div`
   width: 90%;
   margin: 0 auto;
+`;
 
-  @media ${(props) => props.theme.breakpoints.md} {
-    width: 100%;
-  }
+export const Center = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const SectionTitle = styled.h2`

@@ -14,6 +14,7 @@ export const TableContainer = styled.div`
   th {
     text-align: left;
     font-weight: normal;
+    white-space: nowrap;
     color: ${(props) => props.theme.colors.secondaryLight};
   }
 
@@ -26,5 +27,12 @@ export const TableContainer = styled.div`
 
   td {
     white-space: nowrap;
+
+    @media ${(props) => props.theme.breakpoints.md} {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 300px;
+    }
   }
 `;

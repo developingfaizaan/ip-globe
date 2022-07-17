@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Form = styled.form`
   display: flex;
@@ -52,4 +52,16 @@ export const Button = styled.button`
     background: ${(props) => props.theme.colors.accentDark};
     border-color: ${(props) => props.theme.colors.accentDark};
   }
+
+  // ------------------- Disabled Button ------------------- \\
+  ${(props) =>
+    props.disabled
+      ? css`
+          opacity: 0.5;
+          pointer-events: none;
+        `
+      : css`
+          opacity: 1;
+          pointer-events: all;
+        `}
 `;
