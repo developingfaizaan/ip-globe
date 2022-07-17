@@ -50,7 +50,7 @@ const Form = () => {
         <Input
           ref={inputRef}
           type="url"
-          placeholder="https://github.com/developingfaizaan"
+          placeholder="https://twitter.com/devfaizaan"
         />
       </FormGroup>
       <Button disabled={loading}>Create URL</Button>
