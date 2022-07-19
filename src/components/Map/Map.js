@@ -22,7 +22,7 @@ const Map = () => {
 
   useEffect(() => {
     // Getting lon, lat from api response
-    const { lon: longitude, lat: latitude } = currentIpDetail;
+    const { longitude, latitude } = currentIpDetail;
 
     if (!longitude && !latitude) return;
 

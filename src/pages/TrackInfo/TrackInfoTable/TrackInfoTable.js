@@ -41,7 +41,7 @@ const TrackInfoTable = ({ data }) => {
           {clicks.map((click, i) => {
             // Destructuring data
             const { browser, os, osVersion } = click.userDetails;
-            const { query, country, city } = click.ipDetails;
+            const { ip, country_name, city } = click.ipDetails;
 
             return (
               <tbody key={i}>
@@ -49,8 +49,8 @@ const TrackInfoTable = ({ data }) => {
                   <td>
                     {click.date} - {click.time}
                   </td>
-                  <td>{query}</td>
-                  <td>{country}</td>
+                  <td>{ip}</td>
+                  <td>{country_name}</td>
                   <td>{city}</td>
                   <td>{browser}</td>
                   <td>

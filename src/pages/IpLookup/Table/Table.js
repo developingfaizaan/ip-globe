@@ -9,28 +9,27 @@ const Table = () => {
   const { currentIpDetail } = useIpDetail();
 
   // Destructuring details from api response
-  const { query, country, regionName, city, isp, status, message } =
-    currentIpDetail;
+  const { ip, country_name, region, city, org } = currentIpDetail;
 
   // Loading Animation when data is not yet fetched.
   if (!currentIpDetail) return <Loader />;
 
   return (
     <TableContainer>
-      {status === "success" ? ( // If the IP is correct
+      {currentIpDetail.error ? currentIpDetail.reason : (
         <table>
           <tbody>
             <tr>
               <th>IP Address</th>
-              <td>{query && query}</td>
+              <td>{ip && ip}</td>
             </tr>
             <tr>
               <th>Country</th>
-              <td>{country && country}</td>
+              <td>{country_name && country_name}</td>
             </tr>
             <tr>
               <th>State</th>
-              <td>{regionName ? regionName : "----"}</td>
+              <td>{region ? region : "----"}</td>
             </tr>
             <tr>
               <th>City</th>
@@ -38,13 +37,10 @@ const Table = () => {
             </tr>
             <tr>
               <th>Internet Provider</th>
-              <td>{isp && isp}</td>
+              <td>{org && org}</td>
             </tr>
           </tbody>
         </table>
-      ) : (
-        // If the status is not success
-        <p>{message + " - Please enter a valid IP address"}</p>
       )}
     </TableContainer>
   );

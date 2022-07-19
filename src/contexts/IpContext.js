@@ -8,16 +8,16 @@ export const useIpDetail = () => useContext(IpContext);
 
 export const IpProvider = ({ children }) => {
   const [currentIpDetail, setCurrentIpDetail] = useState("");
-
+  
   const fetchIpDetails = async (ip) => {
-    const req = await fetch(`http://ip-api.com/json/${ip}?lang=en`);
+    const req = await fetch(`https://ipapi.co/${ip}/json/`);
     const res = await req.json();
 
     setCurrentIpDetail(res);
   };
 
   const fetchIpOfUser = async () => {
-    const req = await fetch("http://ip-api.com/json");
+    const req = await fetch("https://ipapi.co/json/");
     const res = await req.json();
 
     setCurrentIpDetail(res); // Setting the state

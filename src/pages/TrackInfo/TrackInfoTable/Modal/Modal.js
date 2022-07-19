@@ -10,7 +10,7 @@ import { Button } from "../../../../styles/GlobalComponents/FormComponents";
 
 const Modal = ({ data, setModalOpen }) => {
   // Destructuring data
-  const { query, isp, country, regionName, city, timezone } = data.ipDetails;
+  const { ip, org, country_name, region, city, timezone, postal } = data.ipDetails;
 
   const { browser, os, osVersion, browserVersion, mobile } = data.userDetails;
 
@@ -41,19 +41,23 @@ const Modal = ({ data, setModalOpen }) => {
               </tr>
               <tr>
                 <th>IP Address</th>
-                <td>{query}</td>
+                <td>{ip}</td>
               </tr>
               <tr>
                 <th>Country</th>
-                <td>{country}</td>
+                <td>{country_name}</td>
               </tr>
               <tr>
                 <th>State</th>
-                <td>{regionName}</td>
+                <td>{region}</td>
               </tr>
               <tr>
                 <th>City</th>
                 <td>{city}</td>
+              </tr>
+              <tr>
+                <th>Postal</th>
+                <td>{postal}</td>
               </tr>
               <tr>
                 <th>Timezone</th>
@@ -61,7 +65,7 @@ const Modal = ({ data, setModalOpen }) => {
               </tr>
               <tr>
                 <th>Internet Provider</th>
-                <td>{isp}</td>
+                <td>{org}</td>
               </tr>
               <tr>
                 <th>OS</th>
