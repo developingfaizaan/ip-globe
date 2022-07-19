@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
-import ReactMapGL, { Marker, FlyToInterpolator } from "react-map-gl"
+import ReactMapGL, { Marker, FlyToInterpolator } from "react-map-gl";
 // Context
 import { useIpDetail } from "../../contexts/IpContext";
 // Component
 import CustomMarker from "./Marker";
 
 // added the following lines to fix mapbox transpilation error.
-import mapboxgl from 'mapbox-gl';
+import mapboxgl from "mapbox-gl";
 // The following is required to stop "npm build" from transpiling mapbox code.
 // notice the exclamation point in the import.
 // eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
-mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
-
+mapboxgl.workerClass = require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
 
 // Mapbox Access Token - API KEY
 const TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
